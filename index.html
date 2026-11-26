@@ -310,8 +310,6 @@ section { position: relative; z-index: 1; }
 [data-theme="dark"] .sk.inv img { filter: invert(.92); }
 [data-theme="dark"] .sk.lit img { filter: brightness(1.7) saturate(.85); }
 .sk-fb { display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 6px; border-radius: 9px; font-family: var(--mono); font-size: .8rem; font-weight: 700; color: #fff; background: linear-gradient(135deg, #64748b, #334155); }
-.sk-fb.aws { background: linear-gradient(135deg, #ff9900, #d97706); color: #111827; }
-.sk-fb.azure { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
 
 /* ---------- Projects ---------- */
 .projects { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; }
@@ -383,6 +381,31 @@ section { position: relative; z-index: 1; }
 .certs { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-top: 56px; }
 .certs .lbl { font-family: var(--mono); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
 .certs li { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border-2); background: var(--surface); font-size: .88rem; font-weight: 600; color: var(--head); }
+
+/* ---------- Org logo tiles: every org logo is drawn for light backgrounds, so it always sits on a small white tile ---------- */
+.ot { --h: 36px; display: inline-flex; align-items: center; justify-content: center; flex: none; height: var(--h); padding: calc(var(--h) * .17) calc(var(--h) * .22); border-radius: 8px; background: #fff; border: 1px solid rgba(15, 23, 42, .08); box-shadow: 0 8px 18px -12px rgba(0, 0, 0, .7); vertical-align: middle; }
+[data-theme="light"] .ot { border-color: rgba(15, 23, 42, .12); box-shadow: 0 6px 14px -10px rgba(15, 23, 42, .35); }
+.ot img { flex: none; width: auto; height: 100%; max-width: none; object-fit: contain; }
+.ot-xs { --h: 22px; padding: 3px 5px; border-radius: 6px; box-shadow: none; }
+.ot-sm { --h: 30px; }
+.ot-lg { --h: 40px; }
+.org-lbl { font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.badge .ot-xs { border-color: rgba(15, 23, 42, .1); }
+.badge-orgs { display: inline-flex; align-items: center; gap: 5px; }
+.hero-orgs { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 28px; }
+.org-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 26px; padding-top: 22px; border-top: 1px dashed var(--border-2); }
+.org-row .org-lbl { margin-right: 4px; }
+.sk .ot { --h: 34px; width: 44px; padding: 4px; transition: transform .3s; }
+.sk .ot img { width: 100%; height: 100%; }
+.sk:hover .ot { transform: scale(1.1); }
+.sk:hover .ot img { transform: none; }
+.proj-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.proj-head h3 { min-width: 0; }
+.paper-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.paper .venue.has-org { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.tl-card > .ot { float: right; margin: 0 0 8px 14px; }
+.certs li.has-logo { display: inline-flex; align-items: center; gap: 9px; padding: 6px 16px 6px 7px; }
+.certs .ot-xs { --h: 27px; padding: 3px 7px; }
 
 /* ---------- Arenas: hackathons & contests ---------- */
 .logo-tile { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; flex: none; background: #fff; border-radius: 16px; border: 1px solid rgba(15, 23, 42, .08); box-shadow: 0 10px 26px -14px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255, 255, 255, .6); }
@@ -492,6 +515,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   .avatar-zone { order: -1; margin-top: 30px; }
   .hero-desc { margin-inline: auto; }
   .hero-cta { justify-content: center; }
+  .hero-orgs { justify-content: center; }
   .avatar { --size: 240px; }
   .about-card { grid-template-columns: 1fr; }
   .about-left { max-width: 420px; }
@@ -535,6 +559,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   .arena-cap { margin-top: 48px; }
   .live-card { padding: 10px; }
   .snake { padding: 10px; }
+  .tl-card > .ot { --h: 32px; float: none; display: flex; width: fit-content; margin: 0 0 12px; }
+  .hero-orgs .org-lbl, .org-row .org-lbl { flex-basis: 100%; }
 }
 @media (max-width: 700px) and (prefers-reduced-motion: reduce) {
   .marquee { grid-template-columns: 1fr; width: calc(100% - 32px); }
@@ -542,7 +568,12 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
 @media (max-width: 420px) {
   .stat-tiles.three { grid-template-columns: 1fr; }
   .hero-cta .btn { flex: 1 1 100%; }
-  .badge { font-size: .64rem; letter-spacing: .08em; padding: 7px 12px; }
+  .badge { font-size: .64rem; letter-spacing: .04em; padding: 7px 12px; gap: 8px; }
+  .badge > i { display: none; }
+  .badge .ot-xs { --h: 19px; padding: 2px 4px; }
+}
+@media (max-width: 385px) {
+  .badge { font-size: .58rem; padding: 7px 10px; }
 }
 </style>
 </head>
@@ -613,7 +644,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
     <canvas id="stars" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div class="hero-text">
-        <span class="badge rv"><i aria-hidden="true"></i>FPT UNIVERSITY · GDG ON CAMPUS LEAD</span>
+        <span class="badge rv"><i aria-hidden="true"></i><span class="badge-orgs"><span class="ot ot-xs"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="eager" alt="FPT University logo"></span><span class="ot ot-xs"><img src="assets/logos/gdg.png" width="320" height="177" loading="eager" alt="Google Developer Groups logo"></span></span>FPT UNIVERSITY · GDG ON CAMPUS LEAD</span>
         <h1 class="rv" style="--i:1"><span class="hi">Hi, I'm</span><span class="shimmer">Võ Trần Ngọc Hữu</span></h1>
         <h2 class="rv" style="--i:2">Back-end &amp; AI Engineer</h2>
         <p class="typed-line rv" style="--i:3">
@@ -624,6 +655,11 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <div class="hero-cta rv" style="--i:5">
           <a class="btn btn-solid magnetic" href="#projects">View My Work <span aria-hidden="true">→</span></a>
           <a class="btn btn-outline magnetic" href="https://www.linkedin.com/in/huu-vo-tran-ngoc-719a4618b/" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+        </div>
+        <div class="hero-orgs rv" style="--i:6">
+          <span class="org-lbl">Currently at</span>
+          <span class="ot" title="FPT Software"><img src="assets/logos/fpt-software.png" width="320" height="102" loading="eager" alt="FPT Software logo"></span>
+          <span class="ot" title="Google Developer Groups on Campus"><img src="assets/logos/gdg-oncampus.png" width="320" height="38" loading="eager" alt="Google Developer Groups on Campus logo"></span>
         </div>
       </div>
       <div class="avatar-zone rv" style="--i:2">
@@ -671,6 +707,12 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
           <div class="about-text">
             <p class="rv">I'm a third-year <strong>Software Engineering</strong> student at <strong>FPT University HCMC</strong> (2023–2027). I came to code through the math-specialized class at <strong>Nguyen Binh Khiem Gifted High School</strong>, and that habit of chasing a provable answer still drives me — whether it's an ICPC problem at midnight or a back-end that has to stay correct under load.</p>
             <p class="rv" style="--i:1">Today I'm a <strong>Junior AI Engineer at FPT Software HCM</strong> (F-Town 3) in the AI-Era Junior Program, and I lead <strong>Google Developer Groups on Campus at FPTU</strong>. I love back-end engineering, algorithms and research, and I try to bring all three to every project: clean APIs, the right data structures, and numbers before opinions.</p>
+          </div>
+          <div class="org-row rv" style="--i:2">
+            <span class="org-lbl">Affiliations</span>
+            <span class="ot" title="FPT Software"><img src="assets/logos/fpt-software.png" width="320" height="102" loading="lazy" alt="FPT Software logo"></span>
+            <span class="ot" title="Google Developer Groups on Campus"><img src="assets/logos/gdg-oncampus.png" width="320" height="38" loading="lazy" alt="Google Developer Groups on Campus logo"></span>
+            <span class="ot" title="FPT University"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="lazy" alt="FPT University logo"></span>
           </div>
           <div class="features">
             <article class="feature fx rv" style="--i:0">
@@ -730,10 +772,10 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
             <li class="sk lit" title="MySQL"><img src="https://cdn.simpleicons.org/mysql" alt="" width="34" height="34" loading="lazy" onerror="skFb(this)" data-fb="My"><span class="lab">MySQL</span></li>
             <li class="sk" title="MongoDB"><img src="https://cdn.simpleicons.org/mongodb" alt="" width="34" height="34" loading="lazy" onerror="skFb(this)" data-fb="Mo"><span class="lab">MongoDB</span></li>
             <li class="sk" title="Docker"><img src="https://cdn.simpleicons.org/docker" alt="" width="34" height="34" loading="lazy" onerror="skFb(this)" data-fb="Dk"><span class="lab">Docker</span></li>
-            <!-- AWS and Azure were removed from Simple Icons, so they use text badges instead of a failing request. -->
-            <li class="sk" title="Amazon Web Services"><span class="sk-fb aws" aria-hidden="true">aws</span><span class="lab">AWS</span></li>
-            <li class="sk" title="Microsoft Azure"><span class="sk-fb azure" aria-hidden="true">Az</span><span class="lab">Azure</span></li>
-            <li class="sk" title="Google Cloud"><img src="https://cdn.simpleicons.org/googlecloud" alt="" width="34" height="34" loading="lazy" onerror="skFb(this)" data-fb="GC"><span class="lab">Google Cloud</span></li>
+            <!-- Cloud providers use the official logos from assets/logos on white tiles (AWS and Azure are not in Simple Icons). -->
+            <li class="sk" title="Amazon Web Services"><span class="ot"><img src="assets/logos/aws.png" width="320" height="191" loading="lazy" alt="Amazon Web Services logo"></span><span class="lab">AWS</span></li>
+            <li class="sk" title="Microsoft Azure"><span class="ot"><img src="assets/logos/azure.png" width="320" height="302" loading="lazy" alt="Microsoft Azure logo"></span><span class="lab">Azure</span></li>
+            <li class="sk" title="Google Cloud"><span class="ot"><img src="assets/logos/gcp-mark.png" width="60" height="60" loading="lazy" alt="Google Cloud logo"></span><span class="lab">Google Cloud</span></li>
           </ul>
         </article>
       </div>
@@ -770,7 +812,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
             <div class="shot"><img src="assets/shots/flashfind.svg" width="1280" height="800" loading="lazy" alt=""></div>
           </div>
           <div class="project-body">
-            <h3>FlashFind-Vi</h3>
+            <div class="proj-head"><h3>FlashFind-Vi</h3><span class="ot ot-sm" title="AITA Lab, FPT University"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="lazy" alt="FPT University logo"></span></div>
             <p>On-device Vietnamese OCR search with LSH near-duplicate detection. 2.5× QPS, p95 &lt; 500 ms, −30–40% RAM.</p>
             <ul class="tags" aria-label="Tech stack"><li>Java</li><li>Inverted Index</li><li>MinHash/LSH</li><li>Bloom Filter</li></ul>
             <div class="project-actions">
@@ -785,7 +827,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
             <div class="shot"><img src="assets/shots/anything2md.svg" width="1280" height="800" loading="lazy" alt=""></div>
           </div>
           <div class="project-body">
-            <h3>Anything2MD <small>· FPT Software</small></h3>
+            <div class="proj-head"><h3>Anything2MD <small>· FPT Software</small></h3><span class="ot ot-sm" title="FPT Software"><img src="assets/logos/fpt-software.png" width="320" height="102" loading="lazy" alt="FPT Software logo"></span></div>
             <p>Any document → RAG-ready Markdown, with cost-gated AI spend, a zero-egress offline mode, and a queue-decoupled pipeline.</p>
             <ul class="tags" aria-label="Tech stack"><li>Node.js</li><li>Fastify</li><li>Python</li><li>Nuxt 4</li><li>Azure</li></ul>
             <div class="project-actions">
@@ -800,7 +842,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
             <div class="shot"><img src="assets/shots/member-ranking.svg" width="1280" height="800" loading="lazy" alt=""></div>
           </div>
           <div class="project-body">
-            <h3>Member Ranking <small>· GDGoC</small></h3>
+            <div class="proj-head"><h3>Member Ranking <small>· GDGoC</small></h3><span class="ot ot-sm" title="Google Developer Groups on Campus"><img src="assets/logos/gdg.png" width="320" height="177" loading="lazy" alt="Google Developer Groups logo"></span></div>
             <p>Club leaderboard and activity tracking with a Gemini AI assistant using function calling.</p>
             <ul class="tags" aria-label="Tech stack"><li>React</li><li>Supabase</li><li>Gemini</li><li>JWT</li></ul>
             <div class="project-actions">
@@ -815,7 +857,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
             <div class="shot"><img src="assets/shots/gdgoc-dashboard.svg" width="1280" height="800" loading="lazy" alt=""></div>
           </div>
           <div class="project-body">
-            <h3>GDGoC Project Manager Dashboard</h3>
+            <div class="proj-head"><h3>GDGoC Project Manager Dashboard</h3><span class="ot ot-sm" title="Google Developer Groups on Campus"><img src="assets/logos/gdg.png" width="320" height="177" loading="lazy" alt="Google Developer Groups logo"></span></div>
             <p>Command centre for the club's internal hackathon.</p>
             <ul class="tags" aria-label="Tech stack"><li>Spring Boot</li><li>JavaScript</li><li>SQL</li></ul>
             <div class="project-actions">
@@ -839,7 +881,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
           <div>
             <span class="pill">First author</span>
             <h3>Optimal Layer Partitioning for Memory-Constrained Split Inference on Edge-Cloud Systems</h3>
-            <p class="venue">MC-DP · Target venue: APWeb-WAIM 2026 (Springer LNCS)</p>
+            <p class="venue has-org"><span>MC-DP · Target venue: APWeb-WAIM 2026 (Springer LNCS)</span><span class="ot ot-sm" title="Springer LNCS (target venue publisher)"><img src="assets/logos/springer.png" width="320" height="85" loading="lazy" alt="Springer logo"></span></p>
             <p class="lead">Choosing where to split a neural network between an edge device and the cloud so the edge side always fits its memory budget.</p>
             <ul class="stat-tiles">
               <li class="tile"><b class="grad-text">100%</b><span>feasible partitions</span></li>
@@ -852,7 +894,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         </article>
         <article class="paper alt fx rv">
           <div>
-            <span class="pill v">Research lead · AITA Lab</span>
+            <div class="paper-top"><span class="pill v">Research lead · AITA Lab</span><span class="ot ot-sm" title="AITA Lab, FPT University"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="lazy" alt="FPT University logo"></span></div>
             <h3>FlashFind-Vi</h3>
             <p class="venue">On-device Vietnamese OCR search</p>
             <p class="lead">Inverted index, MinHash/LSH near-duplicate detection and Bloom filters, tuned to search scanned Vietnamese documents on-device.</p>
@@ -878,6 +920,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-brief"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="FPT Software"><img src="assets/logos/fpt-software.png" width="320" height="102" loading="lazy" alt="FPT Software logo"></span>
             <div class="tl-meta"><span class="tl-kind">Work</span><span class="tl-date">2026</span></div>
             <h3>Junior AI Engineer</h3>
             <div class="org">FPT Software HCM, F-Town 3 · AI-Era Junior Program</div>
@@ -887,6 +930,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-mic"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="Google Developer Groups"><img src="assets/logos/gdg.png" width="320" height="177" loading="lazy" alt="Google Developer Groups logo"></span>
             <div class="tl-meta"><span class="tl-kind">Community</span></div>
             <h3>Lead</h3>
             <div class="org">Google Developer Groups on Campus, FPT University</div>
@@ -896,6 +940,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-brief"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="FPT University"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="lazy" alt="FPT University logo"></span>
             <div class="tl-meta"><span class="tl-kind">Research</span><span class="tl-date">Sep 2025 – now</span></div>
             <h3>Research Team Lead</h3>
             <div class="org">AITA Lab, FPT University</div>
@@ -904,6 +949,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-trophy"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="ICPC"><img src="assets/logos/icpc.png" width="320" height="227" loading="lazy" alt="ICPC logo"></span>
             <div class="tl-meta"><span class="tl-kind">Award</span><span class="tl-date">Nov 2025</span></div>
             <h3>Honorable Mention</h3>
             <div class="org">The 2025 ICPC Vietnam National Programming Contest</div>
@@ -913,6 +959,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-trophy"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="ICPC"><img src="assets/logos/icpc.png" width="320" height="227" loading="lazy" alt="ICPC logo"></span>
             <div class="tl-meta"><span class="tl-kind">Award</span><span class="tl-date">2025</span></div>
             <h3>Honorable Mention</h3>
             <div class="org">The 2025 ICPC Vietnam Southern Provincial Programming Contest</div>
@@ -921,6 +968,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-trophy"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="Google"><img src="assets/logos/google.png" width="313" height="320" loading="lazy" alt="Google logo"></span>
             <div class="tl-meta"><span class="tl-kind">Award</span></div>
             <h3>Top 4</h3>
             <div class="org">Google Hackathon on Campus</div>
@@ -929,6 +977,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-trophy"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="FPT University"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="lazy" alt="FPT University logo"></span>
             <div class="tl-meta"><span class="tl-kind">Award</span></div>
             <h3>Honorable Mention</h3>
             <div class="org">FPT University Mathematics Olympiad Team</div>
@@ -937,6 +986,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         <li class="tl rv">
           <span class="node" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></span>
           <div class="tl-card fx">
+            <span class="ot ot-lg" title="FPT University"><img src="assets/logos/fpt-university.png" width="320" height="97" loading="lazy" alt="FPT University logo"></span>
             <div class="tl-meta"><span class="tl-kind">Education</span><span class="tl-date">2023 – 2027</span></div>
             <h3>B.Eng. Software Engineering</h3>
             <div class="org">FPT University HCMC</div>
@@ -954,8 +1004,8 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       <ul class="certs rv" aria-label="Certificates">
         <li class="lbl" aria-hidden="true">Certificates</li>
         <li>VSTEP 6.5 (B2)</li>
-        <li>TOEIC 700</li>
-        <li>JLPT N3</li>
+        <li class="has-logo"><span class="ot ot-xs"><img src="assets/logos/toeic.png" width="320" height="91" loading="lazy" alt="TOEIC logo"></span>TOEIC 700</li>
+        <li class="has-logo"><span class="ot ot-xs"><img src="assets/logos/jlpt.png" width="320" height="97" loading="lazy" alt="JLPT logo"></span>JLPT N3</li>
       </ul>
     </div>
   </section>
@@ -980,7 +1030,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
         </article>
         <article class="feat fx lift rv" style="--i:1">
           <div class="glowbg" aria-hidden="true"></div>
-          <span class="logo-tile"><img src="assets/logos/google.png" width="313" height="320" loading="lazy" alt="Google Developer Groups logo"></span>
+          <span class="logo-tile"><img src="assets/logos/google.png" width="313" height="320" loading="lazy" alt="Google logo"></span>
           <div class="feat-body">
             <span class="gold"><svg class="ic" aria-hidden="true"><use href="#i-trophy"/></svg>Top 4</span>
             <h3>Google Hackathon on Campus</h3>

@@ -457,11 +457,6 @@ section { position: relative; z-index: 1; }
 .live-frame img { width: 100%; height: auto; }
 [data-theme="light"] .live-frame { padding: 10px; border-radius: 18px; background: linear-gradient(160deg, #0b1020, #0d1117 60%, #140f2a); box-shadow: 0 24px 50px -24px rgba(15, 23, 42, .55), inset 0 0 0 1px rgba(255, 255, 255, .06); }
 [data-theme="light"] .live-frame img { border-radius: 12px; }
-.snake { margin-top: 16px; padding: 14px 18px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--border); }
-.snake img { width: 100%; height: auto; }
-.snake .sn-light { display: none; }
-[data-theme="light"] .snake .sn-dark { display: none; }
-[data-theme="light"] .snake .sn-light { display: block; }
 .live-note { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 16px; font-family: var(--mono); font-size: .78rem; color: var(--muted); }
 .live-note i { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34, 197, 94, .5); animation: livePing 2.4s ease-out infinite; }
 @keyframes livePing { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, .55); } 80%, 100% { box-shadow: 0 0 0 9px rgba(34, 197, 94, 0); } }
@@ -558,7 +553,6 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
   .feat .logo-tile { width: 140px; height: 104px; padding: 14px; }
   .arena-cap { margin-top: 48px; }
   .live-card { padding: 10px; }
-  .snake { padding: 10px; }
   .tl-card > .ot { --h: 32px; float: none; display: flex; width: fit-content; margin: 0 0 12px; }
   .hero-orgs .org-lbl, .org-row .org-lbl { flex-basis: 100%; }
 }
@@ -1082,11 +1076,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--border); pa
       </div>
       <div class="live-card fx rv">
         <div class="live-frame"><img src="https://raw.githubusercontent.com/votranngochuu/votranngochuu/main/assets/stats.svg" alt="GitHub activity: all-time commits, contributions, streaks, heatmap and top languages" loading="lazy" width="1200" height="560"></div>
-        <div class="snake">
-          <img class="sn-dark" src="https://raw.githubusercontent.com/votranngochuu/votranngochuu/output/github-snake-dark.svg" alt="Snake animation eating the GitHub contribution graph" loading="lazy" width="880" height="192">
-          <img class="sn-light" src="https://raw.githubusercontent.com/votranngochuu/votranngochuu/output/github-snake.svg" alt="Snake animation eating the GitHub contribution graph" loading="lazy" width="880" height="192">
-        </div>
-        <p class="live-note"><i aria-hidden="true"></i>Updates every few hours from GitHub</p>
+        <p class="live-note"><i aria-hidden="true"></i>Refreshed every 3 hours from GitHub</p>
       </div>
     </div>
   </section>
